@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaração de Bens e Valores</title>
+
+    <style>
+
+        .inline-container {
+            display: flex;
+            align-items: center; /* Alinhar os itens verticalmente */
+        }
+
+        /* Estilo para o campo de entrada */
+        #ano {
+            flex: 0 0 auto; /* Ocupar somente o espaço necessário */
+            margin-right: 10px; /* Espaçamento à direita */
+            width: 250px; /* Largura do campo de entrada */
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <form>
+            <fieldset>
+                <h1>Selecionar Ano para Declaração de Bens e Valores</h1>
+                <!-- Container para colocar os elementos lado a lado -->
+                <div class="inline-container">
+                    <input type="text" id="ano" name="ano" class="form-control" placeholder="Informe o ano que deseja baixar o DBV" maxlength="4">
+                    <button class="btn btn-primary" id="btnBaixar" type="button">Baixar</button>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnBaixar").on("click", function () {
+                var ano = $("#ano").val(); // Obtenha o valor do ano do campo de entrada
+                // Verificar se o ano é um número válido com 4 dígitos
+                if (/^\d{4}$/.test(ano)) {
+                    // Use o ano fornecido pelo usuário no URL
+                    var url = 'http://192.168.7.31:8080/jasperserver/rest_v2/reports/reports/DBV/RelatorioDBV.xlsx?P_PARAMETROS=' + ano;
+                    // Abra o link em uma nova janela
+                    window.open(url, '_blank');
+                } else {
+                    // Se o ano não for válido, exiba uma mensagem de erro
+                    alert("Por favor, insira um ano válido com 4 dígitos numéricos.");
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

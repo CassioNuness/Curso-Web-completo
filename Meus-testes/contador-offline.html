@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempo Offline</title>
+  
+  </head>
+  
+  <body>
+    <button id="toggleButton">Conectar</button>
+
+    <p id="status"></p>
+    <p id="tempo-offline" style="display: none;">Está Offline á: <span id="tempo">0 segundos</span></p>
+
+    <script>
+      var isOnline = false;
+      var offlineTime = 0;
+      var offlineInterval;
+
+      // Função para atualizar o estado online/offline e exibir o tempo offline
+      function toggleConnection() {
+        isOnline = !isOnline;
+        document.getElementById('toggleButton').textContent = isOnline ? 'Desconectar' : 'Conectar';
+        
+        if (isOnline) {
+          document.getElementById('status').textContent = 'Online';
+          document.getElementById('tempo-offline').style.display = 'none';
+          clearInterval(offlineInterval);
+        } else {
+          document.getElementById('status').textContent = 'Desconectado';
+          document.getElementById('tempo-offline').style.display = 'block';
+          offlineTime = 0;
+          offlineInterval = setInterval(function() {
+            offlineTime++;
+            document.getElementById('tempo').textContent = offlineTime + ' segundos';
+          }, 1000);
+        }
+
+        // Se o estado mudou para online, atualizar o registro de último online
+        if (isOnline) {
+          localStorage.setItem('ultimoOnline', new Date().getTime());
+        }
+      }
+
+      // Função para calcular o tempo offline
+      function calcularTempoOffline() {
+        var agora = new Date().getTime();
+        var ultimoOnline = localStorage.getItem('ultimoOnline');
+
+        if (!ultimoOnline) return 0;
+
+        var diferenca = agora - parseInt(ultimoOnline);
+        var segundosOffline = Math.floor(diferenca / 1000);
+
+        return segundosOffline;
+      }
+
+      // Associar a função de alternância ao botão
+      document.getElementById('toggleButton').addEventListener('click', function() {
+        toggleConnection();
+      });
+
+    </script>
+
+  </body>
+
+</html>
