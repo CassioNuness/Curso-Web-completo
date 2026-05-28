@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução do ES6</title>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        // Paradigma procedural
+
+        // Criando um array para armazenar as cadeiras
+      /*  let cadeiras = []; // Aqui criamos o array principal "cadeiras"
+
+        // Criando a Cadeira 1 (índice 0 do array)
+        cadeiras[0] = {}; // Criamos um objeto vazio dentro do array na posição 0
+        cadeiras[0]['qtde_pernas'] = 4; // Definimos a quantidade de pernas
+        cadeiras[0]['giratoria'] = false; // Definimos se a cadeira é giratória ou não
+        cadeiras[0]['cor'] = 'azul'; // Definimos a cor da cadeira
+
+        // Criando a Cadeira 2 (índice 1 do array)
+        cadeiras[1] = {}; // Criamos um objeto vazio dentro do array na posição 1
+        cadeiras[1]['qtde_pernas'] = 1; // Definimos a quantidade de pernas
+        cadeiras[1]['giratoria'] = true; // Definimos que essa cadeira é giratória
+        cadeiras[1]['cor'] = 'vermelha'; // Definimos a cor da cadeira
+
+        // Função para verificar se a cadeira gira
+        function girar_cadeira(indice) {
+            if (cadeiras[indice]['giratoria'] === true) { 
+                console.log('girou'); // Se a cadeira for giratória, exibe "girou"
+            } else {
+                console.log('A cadeira não é giratória'); // Se não for, exibe essa mensagem
+            }
+        }
+
+        // Função corrigida para adicionar novas cadeiras ao array
+        function adicionar_cadeira(qtde_pernas, giratoria, cor) {
+            let cadeira = {}; // Criamos um objeto, não um array
+
+            cadeira['qtde_pernas'] = qtde_pernas;
+            cadeira['giratoria'] = giratoria;
+            cadeira['cor'] = cor;
+
+            cadeiras.push(cadeira); // Adicionamos o objeto ao array "cadeiras"
+        }
+
+        // Adicionando uma nova cadeira ao array
+        adicionar_cadeira(3, false, 'verde');
+
+        // Exibir o array de cadeiras no console para conferir
+        console.log(cadeiras);
+
+        // Chamando a função para testar
+        girar_cadeira(0); // Deve imprimir: "A cadeira não é giratória"
+        girar_cadeira(1); // Deve imprimir: "girou"
+
+        */
+
+        //paradigma de Orientação a Objetos(OO)
+
+
+    //     class Cadeira {
+    //         constructor(qtde_pernas, giratoria, cor) {
+    //             this.qtde_pernas = qtde_pernas;
+    //             this.giratoria = giratoria;
+    //             this.cor = cor;
+    //         }
+
+    //         girarCadeira() {
+    //             if(this.giratoria === true) {
+    //                 console.log('girou'); // Se a cadeira for giratória, exibe "girou"
+    //             } else {
+    //             console.log('A cadeira não é giratória'); // Se não for, exibe essa mensagem
+    //             }
+    //         }
+    //     }
+
+    //     let cadeiras = [];
+
+    //    // Criando e adicionando cadeiras ao array
+    //     cadeiras.push(new Cadeira(4, false, 'azul'));
+    //     cadeiras.push(new Cadeira(1, true, 'vermelha'));
+
+    //     // Agora podemos chamar os métodos corretamente
+    //     cadeiras[0].girarCadeira(); // Deve imprimir: "A cadeira não é giratória"
+    //     cadeiras[1].girarCadeira(); // Deve imprimir: "girou"
+
+
+    //     console.log(cadeiras);
+
+
+        //sofa
+        //cor
+        //quantidade de lugares
+        //inclinavel ou não
+        //metodo pra reclinar o sofá
+
+        class Sofa {
+            constructor(qtde_lugares, inclinavel, cor) {
+                this.qtde_lugares = qtde_lugares;
+                this.inclinavel = inclinavel;
+                this.cor = cor;
+            }
+
+            // Método para verificar se o sofá pode reclinar
+            reclinarSofa() {
+                if (this.inclinavel) {
+                    console.log('O sofá pode ser reclinado.');
+                } else {
+                    console.log('O sofá não é inclinável.');
+                }
+            }
+        }
+
+        let conjDeSofas = [];
+
+        conjDeSofas.push(new Sofa(4, false, 'marrom'));
+        conjDeSofas.push(new Sofa(1, true, 'cinza'));
+        conjDeSofas.push(new Sofa(2, false, 'preto'));
+
+        console.log(conjDeSofas);
+
+        // Testando o método
+        conjDeSofas[0].reclinarSofa(); // "O sofá não é inclinável."
+        conjDeSofas[1].reclinarSofa(); // "O sofá pode ser reclinado."
+        conjDeSofas[2].reclinarSofa(); // "O sofá não é inclinável."
+
+    </script>
+</head>
+
+<body>
+    <div id="output"></div>
+</body>
+
+</html>

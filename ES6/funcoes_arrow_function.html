@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"> <!-- Define o conjunto de caracteres como UTF-8, que suporta caracteres especiais. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Torna a página responsiva para diferentes tamanhos de tela. -->
+    <title>Introdução do ES6</title> <!-- Título da página, exibido na aba do navegador. -->
+
+    <!-- Inclusão do Babel, que converte código ES6+ para uma versão compatível com navegadores mais antigos. -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Início do código JavaScript com suporte ao Babel. -->
+    <script type="text/babel">
+
+    // Definição de uma função tradicional para calcular o quadrado de um número.
+    // let quadrado = function(x) {
+    //     return x * x;
+    // }
+
+    // Reescrita da mesma função usando arrow function com sintaxe mais moderna.
+    // let quadrado = (x) => {
+    //     return x * x;
+    // }
+
+    // Versão simplificada da arrow function com retorno implícito.
+    //let quadrado = x => x * x;
+
+    // Exibe o resultado do cálculo no documento.
+    //document.write(quadrado(3));
+
+    // Função tradicional para verificar se um número é par ou ímpar.
+    // let parOuImpar = function(numero) {
+    //     if(numero % 2 === 0) { // Verifica se o número é divisível por 2 sem resto.
+    //         return 'par'; // Retorna 'par' se a condição for verdadeira.
+    //     } else {
+    //         return 'impar'; // Retorna 'impar' se a condição for falsa.
+    //     }
+    // }
+
+    // Reescrita da mesma lógica usando arrow function.
+    // let parOuImpar = numero => {
+    //     if(numero % 2 === 0) {
+    //         return 'par';
+    //     } else {
+    //         return 'impar';
+    //     }
+    // }
+
+    // Versão simplificada usando operador ternário e retorno implícito.
+    let parOuImpar = numero => numero % 2 === 0 ? 'par' : 'impar';
+
+    // Chama a função com o número 8 e exibe o resultado no documento.
+    document.write(parOuImpar(8));
+
+    </script>
+</head>
+
+<body>
+
+    <!-- Um contêiner vazio que poderia ser usado para exibir saída. -->
+    <div id="output"></div>
+
+</body>
+
+</html>

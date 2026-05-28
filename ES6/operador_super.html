@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução ao ES6</title>
+
+    <!-- Babel permite utilizar recursos modernos do JavaScript (ES6+) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // Classe base Animal
+        class Animal {
+            constructor(cor, tamanho, peso) {
+                // Propriedades comuns a todos os animais
+                this.cor = cor;
+                this.tamanho = tamanho;
+                this.peso = peso;
+            }
+
+            // Método comum a todos os animais
+            dormir() {
+                console.log('Dormir');
+            }
+        }
+        
+        // Classe Passaro herda de Animal
+        class Passaro extends Animal {
+            constructor(bico, cor, tamanho, peso) {
+                // Chama o constructor da classe pai
+                super(cor, tamanho, peso);
+
+                // Propriedade específica dos pássaros
+                this.bico = bico;
+            }
+
+            // Método comum aos pássaros
+            voar() {
+                console.log('Voar');
+            }
+        }
+
+        // Classe Papagaio herda de Passaro
+        class Papagaio extends Passaro {
+            constructor(sabeFalar, cor, tamanho, peso) {
+                // Define o bico como "Médio" e reaproveita o constructor da classe pai
+                super('Médio', cor, tamanho, peso);
+
+                // Propriedade específica do papagaio
+                this.sabeFalar = sabeFalar;
+            }
+
+            // Método exclusivo do papagaio
+            falar() {
+                console.log('Falar');
+            }
+        }
+
+        // Criando o primeiro objeto Papagaio
+        let papagaio = new Papagaio(true, 'verde', 25, 350);
+        console.log(papagaio);
+
+        // Criando o segundo objeto Papagaio com valores diferentes
+        let papagaio2 = new Papagaio(false, 'Branco', 10, 80);
+        console.log(papagaio2);
+
+    </script>
+</head>
+
+<body>
+    <!-- Estrutura HTML básica -->
+    <div id="output"></div>
+</body>
+</html>

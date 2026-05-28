@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"> <!-- Define o conjunto de caracteres como UTF-8, garantindo suporte a caracteres especiais. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Torna o layout da página responsivo em dispositivos móveis. -->
+    <title>Introdução do ES6</title> <!-- Define o título da aba do navegador. -->
+
+    <!-- Inclui o Babel para permitir o uso de código ES6+ em navegadores mais antigos. -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Início do script com suporte ao Babel -->
+    <script type="text/babel">
+        
+        //modelo e objeto
+        class ContaBancaria {
+
+            constructor() {
+                this.agencia = 1075;
+                this.numeroConta = 8351125;
+                this.saldo = 50;
+                this.limite = 450;
+            }
+
+            depositar (valorDeposito){
+                this.saldo += valorDeposito;
+            }
+
+            sacar(valorSaque){
+                this.saldo -= valorSaque;
+            }
+
+            consultarSaldo(){
+                return this.saldo;
+            }
+        }
+
+        let x = new ContaBancaria();
+        let y = new ContaBancaria();
+
+        console.log('Saldo da conta x é: ' + x.consultarSaldo());
+        x.depositar(450);
+        console.log(x.consultarSaldo());
+        x.sacar(200);
+        console.log(x.consultarSaldo());
+
+        console.log(y.consultarSaldo());
+
+
+    </script>
+</head>
+
+<body>
+
+    <!-- Um contêiner vazio. Não é usado neste exemplo, mas poderia ser usado para exibir o conteúdo dinamicamente. -->
+    <div id="output"></div>
+
+</body>
+
+</html>

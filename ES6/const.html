@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução do ES6</title>
+
+    <!-- Incluindo o Babel para compilar o código ES6+ -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        // Declarando uma constante no escopo global
+        const SERIE = 'Friends';
+
+        // Função x declarada
+        function x() {
+            // Criando uma nova constante no escopo da função
+            const SERIE = 'The Walking Dead'; // Essa constante é diferente da global
+            console.log('dentro da função: ' + SERIE); // Exibirá 'The Walking Dead', pois utiliza o valor local
+        }
+
+        // Tentativa de acessar uma variável não definida (erro no código original)
+        console.log('escopo global: ' + SERIE); // Exibirá 'Friends', pois está acessando a constante global
+
+        // Invocando a função `x` para exibir o valor local
+        x();
+
+        // Tentativa de acessar uma constante que não existe no código
+        //console.log('fora do escopo: ' + SERIE_LOCAL); // Gera um erro, pois `SERIE_LOCAL` não está declarada
+    </script>
+</head>
+
+<body>
+    <div id="output"></div>
+</body>
+
+</html>

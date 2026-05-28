@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução ao ES6</title>
+
+    <!-- Babel para permitir o uso de ES6 no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // Classe base (classe pai)
+        class Animal {
+            constructor() {
+                // Propriedades comuns a todos os animais
+                this.cor = '';
+                this.tamanho = null;
+                this.peso = null;
+            }
+
+            // Método comum a todos os animais
+            dormir() {
+                console.log('Dormir');
+            }
+        }
+        
+        // Classe Cachorro herda de Animal
+        class Cachorro extends Animal {
+            constructor(){
+                // Chama o constructor da classe pai (Animal)
+                super();
+
+                // Propriedade específica do cachorro
+                this.orelhas = 'Grandes e caidas';
+            } 
+
+            // Métodos exclusivos do cachorro
+            correr() {
+                console.log('Correr');
+            }
+
+            rosnar() {
+                console.log('Rosnar');
+            }
+        }
+
+        // Classe Passaro herda de Animal
+        class Passaro extends Animal {
+            constructor() {
+                // Chama o constructor da classe pai
+                super();
+
+                // Propriedade específica do pássaro
+                this.bico = 'Curto';
+            }
+
+            // Método exclusivo do pássaro
+            voar() {
+                console.log('Voar');
+            }
+        }
+
+        // Classe Papagaio herda de Passaro (herança em cadeia)
+        class Papagaio extends Passaro {
+            constructor() {
+                // Chama o constructor da classe pai (Passaro)
+                super();
+
+                // Propriedade exclusiva do papagaio
+                this.sabeFalar = true;
+            }
+
+            // Método exclusivo do papagaio
+            falar() {
+                console.log('Falar');
+            }
+        }
+
+        // Instanciando os objetos
+        let cachorro = new Cachorro();
+        let passaro = new Passaro();
+        let papagaio = new Papagaio();
+
+        // Exemplos de chamadas de métodos herdados e próprios
+        // cachorro.dormir();   // método herdado de Animal
+        // passaro.dormir();    // método herdado de Animal
+        // papagaio.falar();    // método próprio do Papagaio
+        // papagaio.dormir();   // método herdado de Animal
+        // papagaio.voar();     // método herdado de Passaro
+
+        // Exibindo os objetos no console para visualizar a herança
+        console.log(cachorro);
+        console.log(passaro);
+        console.log(papagaio);
+
+    </script>
+</head>
+
+<body>
+    <!-- Apenas estrutura HTML, não usada no JavaScript -->
+    <div id="output"></div>
+</body>
+</html>

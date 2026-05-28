@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"> <!-- Define o conjunto de caracteres como UTF-8, garantindo suporte a caracteres especiais. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Torna o layout da página responsivo em dispositivos móveis. -->
+    <title>Introdução do ES6</title> <!-- Define o título da aba do navegador. -->
+
+    <!-- Inclui o Babel para permitir o uso de código ES6+ em navegadores mais antigos. -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Início do script com suporte ao Babel -->
+    <script type="text/babel">
+        // Declara uma função com parâmetros padrão.
+        function contarUmaHistoria(personagem = 'Fubá', atividade = 'Correr no parque', nome_dono = 'João') {
+            // A função usa template literals (crases ``) para interpolação de variáveis.
+            // Isso torna o código mais legível e evita a necessidade de concatenar strings manualmente.
+            document.write(`Era uma vez um cachorro chamado ${personagem}, ele adorava ${atividade}, seu dono era o ${nome_dono}, e eles viveram felizes para sempre.`);
+        }
+
+        // Chamada da função com argumentos fornecidos.
+        // Substitui os valores padrão pelos valores passados na chamada.
+        contarUmaHistoria('Repolho', 'Enterrar ossos', 'Pedro');
+    </script>
+</head>
+
+<body>
+
+    <!-- Um contêiner vazio. Não é usado neste exemplo, mas poderia ser usado para exibir o conteúdo dinamicamente. -->
+    <div id="output"></div>
+
+</body>
+
+</html>

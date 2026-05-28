@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução ao ES6</title>
+
+    <!-- Babel permite usar recursos do ES6 no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // Classe base Animal
+        class Animal {
+            constructor(cor, tamanho, peso) {
+                // Propriedades comuns a todos os animais
+                this.cor = cor;
+                this.tamanho = tamanho;
+                this.peso = peso;
+            }
+
+            // Método comum a todos os animais
+            dormir() {
+                console.log('Dormir');
+            }
+        }
+        
+        // Classe Passaro herda de Animal
+        class Passaro extends Animal {
+            constructor(bico, cor, tamanho, peso) {
+                // Chama o constructor da classe pai (Animal)
+                super(cor, tamanho, peso);
+
+                // Propriedade específica dos pássaros
+                this.bico = bico;
+            }
+
+            // Método comum aos pássaros
+            voar() {
+                console.log('Voar');
+            }
+        }
+
+        // Classe Avestruz herda de Passaro
+        class Avestruz extends Passaro {
+            constructor() {
+                // Valores fixos passados para o constructor da classe pai
+                super('Grande', 'Branco e preto', 250, 15000);
+            }
+
+            // Método exclusivo do avestruz
+            enterrarCabeça() {
+                console.log('Enterrar a cabeça');
+            }
+
+            // Sobrescrita do método voar (polimorfismo)
+            voar() {
+                console.log('Não sabe voar');
+            }
+        }
+
+        // Classe Papagaio herda de Passaro
+        class Papagaio extends Passaro {
+            constructor(sabeFalar, cor, tamanho, peso) {
+                // Define o bico como "Médio" e repassa os demais valores
+                super('Médio', cor, tamanho, peso);
+
+                // Propriedade específica do papagaio
+                this.sabeFalar = sabeFalar;
+            }
+
+            // Método exclusivo do papagaio
+            falar() {
+                console.log('Falar');
+            }
+        }
+
+        // Criando um objeto Papagaio
+        let papagaio = new Papagaio(true, 'verde', 25, 350);
+        console.log(papagaio);
+
+        // Chamada do método herdado de Passaro
+        papagaio.voar();
+
+        // Criando um objeto Avestruz
+        let avestruz = new Avestruz();
+
+        // Chamando método próprio do Avestruz
+        avestruz.enterrarCabeça();
+
+        // Chamando método sobrescrito
+        avestruz.voar();
+
+    </script>
+</head>
+
+<b

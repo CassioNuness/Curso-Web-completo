@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução ao ES6</title>
+
+    <!-- Babel permite usar recursos modernos do JavaScript (ES6+) no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Código JavaScript usando ES6 -->
+    <script type="text/babel">
+
+        // Variáveis comuns
+        let nome = 'Jorge';
+        let idade = 29;
+        let sexo = 'Masculino';
+        let profissao = 'Programador';
+
+        // Objeto literal no formato tradicional (pré-ES6)
+        let objeto = {
+            // Atribuição explícita (chave: valor)
+            nome: nome,
+            idade: idade,
+            sexo: sexo,
+            profissao: profissao,
+
+            // Método declarado usando function
+            exibirResumo: function() {
+                console.log(`${this.nome}, ${this.idade} anos, é ${this.profissao}`);
+            }
+        }
+
+        // Exibe o objeto completo no console
+        console.log(objeto);
+
+        // Chama o método do objeto
+        objeto.exibirResumo();
+
+        // Objeto literal usando melhorias do ES6
+        let objeto2 = {
+            // Shorthand property: quando o nome da variável
+            // é igual ao nome da propriedade
+            nome,
+            idade,
+            sexo,
+            profissao,
+
+            // Forma reduzida de declarar métodos (sem 'function')
+            exibirResumo() {
+                console.log(`${this.nome}, ${this.idade} anos, é ${this.profissao}`);
+            }
+        }
+
+        // Exibe o objeto criado com ES6
+        console.log(objeto2);
+
+        // Chama o método do objeto ES6
+        objeto2.exibirResumo();
+
+    </script>
+</head>
+
+<body>
+    <!-- Corpo da página vazio, exemplo focado apenas em JavaScript -->
+</body>
+</html>

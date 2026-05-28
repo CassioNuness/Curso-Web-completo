@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exemplos de Escopo</title>
+    <!-- Inclui o Babel para suporte ao ES6+ -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 3 tipos de escopo: global, função e bloco
+
+        // Primeira parte: Demonstrando o escopo de `var` dentro de funções e blocos.
+        /*
+        var serie = "Friends"; // Declaração global
+        function x() {
+            var serie = "Game Of Thrones"; // Declaração no escopo da função
+            console.log('função: ' + serie); // Acessa a variável da função
+            if (true) {
+                console.log('bloco dentro da função: ' + serie); // Também acessa a variável da função
+            }
+        }
+
+        x(); // Chama a função `x`, exibindo os logs da função e do bloco interno.
+
+        if (true) {
+            console.log('global: ' + serie); // Acessa a variável global, pois o `var` é visível globalmente.
+        }
+        */
+
+        // Segunda parte: Problemas de `var` sendo acessível fora do escopo esperado.
+        /*
+        function x() {
+            console.log('dentro da função: ' + serie); // Tenta acessar `serie`, mas depende de onde ela foi declarada.
+
+            if (true) {
+                // var serie = 'The Walking Dead'; // Se descomentado, cria uma variável local.
+            }
+        }
+
+        x(); // Chama a função, causando um erro se `serie` não foi declarada globalmente.
+        if (true) {
+            var serie = 'The Walking Dead'; // Declaração global, mesmo dentro de um bloco.
+            console.log(serie); // Exibe o valor "The Walking Dead".
+        }
+
+        console.log(serie); // A variável ainda está acessível aqui, pois `var` ignora o escopo de bloco.
+        */
+
+        // Terceira parte: Uso de `let` para respeitar o escopo de bloco.
+        if (true) {
+            let serie = "Friends"; // `let` cria uma variável limitada ao bloco.
+            console.log(serie); // Acessa a variável dentro do bloco.
+        }
+        console.log(serie); // Gera um erro, pois `serie` não está definida fora do bloco `if`.
+    </script>
+</head>
+
+<body>
+    <div id="output"></div>
+</body>
+
+</html>

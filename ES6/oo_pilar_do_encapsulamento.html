@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução ao ES6</title>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class Tv {
+            // Declaração de atributos privados usando #
+            #relacaoCanais;
+            #canalAtivo;
+            #volume;
+
+            constructor() {
+                // Inicializando os atributos privados no construtor
+                this.#relacaoCanais = [2, 4, 5, 7, 10]; // Lista de canais disponíveis
+                this.#canalAtivo = 5; // Canal inicial da TV
+                this.#volume = 5; // Volume inicial
+            }
+
+            // Getter para obter o canal ativo
+            get canalAtivo() {
+                return this.#canalAtivo;
+            }
+
+            // Setter para alterar o canal ativo, validando se o canal existe na lista
+            set canalAtivo(canal) {
+                if (this.#relacaoCanais.includes(canal)) { // Verifica se o canal está na lista
+                    this.#canalAtivo = canal;
+                } else {
+                    console.log("Canal inválido! Escolha um dos canais disponíveis:", this.#relacaoCanais);
+                }
+            }
+        }
+
+        // Criando uma instância da TV
+        let tv = new Tv();
+
+        // Tentando alterar o canal corretamente pelo setter
+        tv.canalAtivo = 7; // Canal válido
+        console.log(tv.canalAtivo); // Deve imprimir: 7
+
+        tv.canalAtivo = 99; // Canal inválido
+        console.log(tv.canalAtivo); // Continua 7, pois 99 não está na lista
+
+        // Tentando modificar diretamente (agora não funciona mais)
+        // tv.#canalAtivo = 10; // Isso geraria um erro porque #canalAtivo é privado
+
+    </script>
+</head>
+
+<body>
+    <div id="output"></div>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução ao ES6</title>
+
+    <!-- Babel permite usar recursos modernos do JavaScript (ES6+) no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Código JavaScript usando ES6 -->
+    <script type="text/babel">
+
+       let assinatura = {
+        idCliente: 1000,
+        descricao: 'Acesso a Internet',
+        status() {
+            console.log('Ativo');
+        }
+       }
+
+       console.log(assinatura.descricao);
+
+    </script>
+</head>
+
+<body>
+    <!-- Corpo da página vazio, exemplo focado apenas em JavaScript -->
+</body>
+</html>
