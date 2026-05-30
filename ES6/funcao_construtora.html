@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introdução ao ES6</title>
+
+    <!-- Babel permite usar recursos modernos do JavaScript (ES6+) no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        let Carro = function () {
+
+            this.cor = "Amarelo";
+            this.modelo = "Chevette";
+            this.velocidade = 0;
+            this.velocidadeMaxima = 180;
+
+            this.acelerar = function () {
+
+                let velocidade = this.getVelocidadeAtual() + 10;
+
+                this.setVelocidadeAtual(velocidade);
+
+            };
+
+            this.getVelocidadeAtual = function () {
+                return this.velocidade;
+            };
+
+            this.setVelocidadeAtual = function (velocidadeAtual) {
+                this.velocidade = velocidadeAtual;
+            };
+
+        };
+
+        let carro = new Carro();
+
+        console.log(`A velocidade atual do carro é: ${carro.getVelocidadeAtual()}`);
+
+        carro.acelerar();
+
+        console.log(`A velocidade após acelerar é: ${carro.getVelocidadeAtual()}`);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
