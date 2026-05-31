@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Funções Factory</title>
+
+    <!-- Babel permite utilizar recursos ES6+ diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+    //objeto literal
+    let a1 = {
+        cor: "Branca",
+        modelo: "Airbus a380",
+        levantarVoo() {
+            console.log("Levantando voo");
+        }
+    }
+
+    //função construtora
+    let AviaoF = function() {
+        this.cor = "Azul",
+        this.modelo = "Airbus a380",
+        this.levantarVoo = function() {
+            console.log("Levantando voo");
+        }
+    }
+
+    let a2 = new AviaoF();
+
+    //classe
+    class AviaoC {
+        constructor() {
+            this.cor = "Azul";
+            this.modelo = "Embraer E-Jets";
+        }
+
+        levantarVoo() {
+            console.log("Levantando voo");
+        }
+    }
+
+    let a3 = new AviaoC();
+
+    console.log(a1);
+    console.log(a2);
+    console.log(a3);
+    
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
