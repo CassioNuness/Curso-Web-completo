@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Funções Construtoras - Encapsulamento</title>
+
+    <!-- Babel permite utilizar recursos ES6+ diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // ======================================================
+        // EXEMPLO 1 - SEM ENCAPSULAMENTO
+        // ======================================================
+        // Todos os atributos podem ser acessados e alterados
+        // externamente utilizando "this".
+
+        let Carro = function () {
+
+            // Atributos públicos
+            this.cor = "Amarelo";
+            this.modelo = "Chevette";
+            this.velocidadeAtual = 0;
+            this.velocidadeMaxima = 180;
+
+            // Método público
+            this.acelerar = function () {
+
+                let velocidade = this.getVelocidadeAtual() + 50;
+
+                // Limita a velocidade máxima
+                if (velocidade > this.velocidadeMaxima) {
+                    velocidade = this.velocidadeMaxima;
+                }
+
+                this.setVelocidadeAtual(velocidade);
+            };
+
+            // Getter
+            this.getVelocidadeAtual = function () {
+                return this.velocidadeAtual;
+            };
+
+            // Setter
+            this.setVelocidadeAtual = function (velocidadeAtual) {
+                this.velocidadeAtual = velocidadeAtual;
+            };
+        };
+
+        let carro = new Carro();
+
+        console.log(carro.velocidadeAtual);
+
+        carro.acelerar();
+        console.log(carro.velocidadeAtual);
+
+        carro.acelerar();
+        console.log(carro.velocidadeAtual);
+
+        carro.acelerar();
+        console.log(carro.velocidadeAtual);
+
+        carro.acelerar();
+        console.log(carro.velocidadeAtual);
+
+        // Como velocidadeMaxima é pública,
+        // podemos alterá-la externamente.
+        carro.velocidadeMaxima = 280;
+
+        carro.acelerar();
+        console.log(carro.velocidadeAtual);
+
+
+        // ======================================================
+        // EXEMPLO 2 - COM ENCAPSULAMENTO
+        // ======================================================
+        // velocidadeMaxima e quilometrosRodados ficam privados.
+
+        let Carro2 = function () {
+
+            // Variáveis privadas
+            var velocidadeMaxima = 180;
+            var quilometrosRodados = 0;
+
+            // Atributos públicos
+            this.cor = "Amarelo";
+            this.modelo = "Chevette";
+            this.velocidadeAtual = 0;
+
+            // Método público
+            this.acelerar = function () {
+
+                let velocidade = this.getVelocidadeAtual() + 50;
+
+                // Utiliza a variável privada
+                if (velocidade > velocidadeMaxima) {
+                    velocidade = velocidadeMaxima;
+                }
+
+                this.setVelocidadeAtual(velocidade);
+
+                // Atualiza a quilometragem utilizando método privado
+                setQuilometrosRodados(0.07);
+
+                console.log(`Quilômetros rodados: ${quilometrosRodados}`);
+            };
+
+            // Getter
+            this.getVelocidadeAtual = function () {
+                return this.velocidadeAtual;
+            };
+
+            // Setter
+            this.setVelocidadeAtual = function (velocidadeAtual) {
+                this.velocidadeAtual = velocidadeAtual;
+            };
+
+            // Método privado
+            var setQuilometrosRodados = function (q) {
+                quilometrosRodados += q;
+            };
+        };
+
+        let carro2 = new Carro2();
+
+        console.log(carro2.velocidadeAtual);
+
+        carro2.acelerar();
+        console.log(carro2.velocidadeAtual);
+
+        carro2.acelerar();
+        console.log(carro2.velocidadeAtual);
+
+        carro2.acelerar();
+        console.log(carro2.velocidadeAtual);
+
+        carro2.acelerar();
+        console.log(carro2.velocidadeAtual);
+
+        // Mesmo que tentássemos:
+        // carro2.velocidadeMaxima = 280;
+        // Não afetaria a variável privada.
+
+        carro2.acelerar();
+        console.log(carro2.velocidadeAtual);
+
+        // Exibe os objetos
+        console.log(carro);
+        console.log(carro2);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
