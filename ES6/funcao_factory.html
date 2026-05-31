@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Funções Factory</title>
+
+    <!-- Babel permite utilizar recursos ES6+ diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // ======================================================
+        // OBJETOS LITERAIS
+        // ======================================================
+        // Cada bicicleta é criada manualmente.
+        // Funciona bem para poucos objetos, mas gera repetição de código.
+
+        let Bicicleta1 = {
+            cor: "Branca",
+            marcha: "única",
+            aro: 12,
+
+            pedalar() {
+                console.log("Método pedalar executado");
+            }
+        };
+
+        let Bicicleta2 = {
+            cor: "Vermelha",
+            marcha: "18",
+            aro: 26,
+
+            pedalar() {
+                console.log("Método pedalar executado");
+            }
+        };
+
+        // Exibe os objetos criados manualmente
+        console.log(Bicicleta1);
+        console.log(Bicicleta2);
+
+
+        // ======================================================
+        // FACTORY FUNCTION
+        // ======================================================
+        // Uma Factory Function funciona como uma "fábrica" de objetos.
+        // Recebe parâmetros e retorna um novo objeto pronto.
+
+        let BicicletaFactory = function (cor, marcha, aro) {
+
+            // Aqui poderia existir qualquer lógica de negócio
+            // validações, requisições HTTP, cálculos, etc.
+
+            return {
+                cor,
+                marcha,
+                aro,
+
+                pedalar() {
+                    console.log("Método pedalar executado");
+                }
+            };
+        };
+
+
+        // Criando objetos através da fábrica
+        let Bicicleta3 = BicicletaFactory("Branca", "única", 12);
+        let Bicicleta4 = BicicletaFactory("Vermelha", "18", 26);
+
+        // Exibe os objetos criados pela Factory Function
+        console.log(Bicicleta3);
+        console.log(Bicicleta4);
+
+
+        // Exibindo propriedades individuais
+        console.log(`Cor: ${Bicicleta3.cor}`);
+        console.log(`Marcha: ${Bicicleta3.marcha}`);
+        console.log(`Aro: ${Bicicleta3.aro}`);
+
+        // Executando método
+        Bicicleta3.pedalar();
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
