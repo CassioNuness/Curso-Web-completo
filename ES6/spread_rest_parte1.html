@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Operador Rest / Spread</title>
+
+    <!-- Babel permite utilizar recursos ES6+ diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // ======================================================
+        // OPERADOR SPREAD (...)
+        // ======================================================
+        // Spread significa "espalhar" os elementos de uma estrutura.
+
+        // ------------------------------------------------------
+        // Exemplo com String
+        // ------------------------------------------------------
+
+        let tituloArtigo = "Como utilizar o operador rest/spread";
+
+        console.log(tituloArtigo);
+
+        // Espalha cada caractere individualmente
+        console.log(...tituloArtigo);
+
+        // Cria um array com cada caractere da string
+        console.log([...tituloArtigo]);
+
+
+        // ------------------------------------------------------
+        // Exemplo com Arrays
+        // ------------------------------------------------------
+
+        let listaCursos1 = [
+            "NodeJS e MongoDB",
+            "ES6, TypeScript e Angular"
+        ];
+
+        let listaCursos2 = [
+            "Multiplataforma Android/iOS",
+            "Introdução ao GNU/Linux"
+        ];
+
+        // Junta vários arrays em um único array
+        let listaCursosCompleta = [
+            "Web Completo",
+            "Android Completo",
+            ...listaCursos1,
+            ...listaCursos2
+        ];
+
+        console.log(listaCursosCompleta);
+
+
+        // ------------------------------------------------------
+        // Exemplo com Objetos
+        // ------------------------------------------------------
+
+        let pessoa = {
+            nome: "João",
+            idade: 30
+        };
+
+        // Cria uma cópia do objeto adicionando novas propriedades
+        let clone = {
+            endereco: "Rua das Flores, 123",
+            ...pessoa
+        };
+
+        console.log(clone);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
