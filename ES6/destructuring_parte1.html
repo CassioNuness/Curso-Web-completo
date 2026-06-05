@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Destructuring Assignment - Arrays</title>
+
+    <!-- Babel permite utilizar recursos ES6+ diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // ======================================================
+        // DESTRUCTURING ASSIGNMENT
+        // ======================================================
+        // Permite extrair valores de arrays e atribuí-los
+        // diretamente a variáveis.
+
+        // ------------------------------------------------------
+        // Exemplo 1 - Array simples
+        // ------------------------------------------------------
+
+        let frutas = ['Abacaxi', 'Uva', 'Pera', 'Mamão'];
+
+        // a = Abacaxi
+        // b = Uva
+        // c = Pera
+        // d = Mamão
+        // e = Banana (valor padrão)
+        let [a, b = 'Abacate', c, d, e = 'Banana'] = frutas;
+
+        // console.log(a, b, c, d, e);
+
+
+        // ------------------------------------------------------
+        // Exemplo 2 - Arrays aninhados
+        // ------------------------------------------------------
+
+        let coisas = [
+            ['Abacaxi', 'Uva', 'Pera', 'Mamão'],
+            ['José', 'Maria']
+        ];
+
+        // Acessa o terceiro elemento do primeiro array
+        // coisas[0][2]
+        let [[,,n3]] = coisas;
+
+        console.log(n3); // Pera
+
+
+        // Acessa o segundo elemento do segundo array
+        // coisas[1][1]
+        let [,[,n2]] = coisas;
+
+        console.log(n2); // Maria
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
