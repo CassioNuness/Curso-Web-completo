@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Destructuring Assignment - Objetos</title>
+
+    <!-- Babel permite utilizar recursos ES6+ diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // ======================================================
+        // DESTRUCTURING ASSIGNMENT - OBJETOS
+        // ======================================================
+        // Permite extrair propriedades de objetos e atribuí-las
+        // diretamente a variáveis.
+
+        // ------------------------------------------------------
+        // Objeto com composição
+        // ------------------------------------------------------
+        // "tem um" ou "é um"
+        // produto possui um objeto detalhes
+
+        let produto = {
+            descricao: 'Notebook',
+            preco: 1800,
+
+            detalhes: {
+                fabricante: 'Dell',
+                modelo: 'XPS 13'
+            }
+        };
+
+        // ------------------------------------------------------
+        // Exemplos básicos
+        // ------------------------------------------------------
+
+        // Extrai propriedades com o mesmo nome
+        // let { descricao, preco } = produto;
+
+        // Renomeando variáveis
+        // let { descricao: d, preco: p } = produto;
+
+        // Propriedade inexistente
+        // let { descricao: d, preco: p, desconto } = produto;
+
+        // Valor padrão
+        // let { descricao: d, preco: p = 1000, desconto = 5 } = produto;
+
+        // ------------------------------------------------------
+        // Destructuring de objeto dentro de objeto
+        // ------------------------------------------------------
+
+        let {
+            detalhes: {
+                fabricante: f,
+                modelo = 'Não informado'
+            }
+        } = produto;
+
+        console.log(f, ' - ', modelo);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
