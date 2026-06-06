@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Destructuring Assignment - Rest Operator</title>
+
+    <!-- Babel permite utilizar recursos ES6+ diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // ======================================================
+        // DESTRUCTURING + REST OPERATOR
+        // ======================================================
+
+        // ------------------------------------------------------
+        // Exemplo com Arrays
+        // ------------------------------------------------------
+        /*
+        let arr = [10, 20, 30, 40];
+
+        // a recebe o primeiro valor
+        // resto recebe os demais valores em um novo array
+        let [a, ...resto] = arr;
+
+        console.log(a);      // 10
+        console.log(resto);  // [20, 30, 40]
+        */
+
+        // ------------------------------------------------------
+        // Exemplo com Objetos
+        // ------------------------------------------------------
+
+        let obj = {
+            a: 10,
+            b: 20,
+            c: 30,
+            d: 40
+        };
+
+        // a recebe o valor da propriedade "a"
+        // z recebe todas as demais propriedades
+        let { a, ...z } = obj;
+
+        console.log(a); // 10
+
+        console.log(z);
+        /*
+        {
+            b: 20,
+            c: 30,
+            d: 40
+        }
+        */
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
