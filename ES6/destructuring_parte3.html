@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Destructuring Assignment - Parâmetros de Função</title>
+
+    <!-- Babel permite utilizar recursos ES6+ diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        // ======================================================
+        // DESTRUCTURING EM PARÂMETROS DE FUNÇÃO
+        // ======================================================
+
+        // ------------------------------------------------------
+        // Exemplo com Array
+        // ------------------------------------------------------
+        /*
+        let arr = [10, 20, 30, 40];
+
+        function teste([a, b, , c, d = 100]) {
+            console.log(a, b, c, d);
+        }
+
+        teste(arr);
+
+        Resultado:
+        a = 10
+        b = 20
+        c = 40
+        d = 100 (valor padrão)
+        */
+
+        // ------------------------------------------------------
+        // Exemplo com Objeto
+        // ------------------------------------------------------
+
+        let obj = {
+            a: 10,
+            b: 20,
+            c: 30,
+            d: 40
+        };
+
+        function teste({ a: x, d, z = 100 }) {
+
+            // a é renomeado para x
+            // d mantém o nome original
+            // z não existe no objeto, então recebe 100
+
+            console.log(x, d, z);
+        }
+
+        teste(obj);
+
+        // Resultado:
+        // x = 10
+        // d = 40
+        // z = 100
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
