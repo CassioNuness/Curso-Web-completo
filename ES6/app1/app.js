@@ -24,7 +24,6 @@ class Despesa {
 // Classe responsável por manipular o LocalStorage
 class Bd {
   constructor() {
-
     // Recupera o último id salvo
     let id = localStorage.getItem("id");
 
@@ -53,7 +52,6 @@ class Bd {
 
   // Recupera todas as despesas armazenadas
   recuperarTodosRegistros() {
-
     let despesas = Array();
 
     // Recupera o último id cadastrado
@@ -61,7 +59,6 @@ class Bd {
 
     // Percorre todos os registros do LocalStorage
     for (let i = 1; i <= id; i++) {
-
       // Recupera a despesa da posição atual
       let despesa = JSON.parse(localStorage.getItem(i));
 
@@ -76,6 +73,11 @@ class Bd {
 
     return despesas;
   }
+
+  pesquisar(despesa) {
+     console.log(despesa);
+  }
+
 }
 
 // Instancia do banco de dados
@@ -83,7 +85,6 @@ let bd = new Bd();
 
 // Função responsável pelo cadastro da despesa
 function cadastrarDespesa() {
-
   // Recupera os campos do formulário
   let ano = document.getElementById("ano");
   let mes = document.getElementById("mes");
@@ -99,12 +100,11 @@ function cadastrarDespesa() {
     dia.value,
     tipo.value,
     descricao.value,
-    valor.value
+    valor.value,
   );
 
   // Valida os dados informados
   if (despesa.validarDados()) {
-
     // Salva a despesa
     bd.gravar(despesa);
 
@@ -118,23 +118,18 @@ function cadastrarDespesa() {
     document.getElementById("modalConteudo").innerHTML =
       "Despesa cadastrada com sucesso!";
 
-    document.getElementById("modalBtn").className =
-      "btn btn-success";
+    document.getElementById("modalBtn").className = "btn btn-success";
 
-    document.getElementById("modalBtn").innerHTML =
-      "Voltar";
+    document.getElementById("modalBtn").innerHTML = "Voltar";
 
     // Exibe o modal
     $("#modalRegistraDespesa").modal("show");
 
     // Limpa os campos do formulário
     limparCampos();
-
   } else {
-
     // Configura o modal de erro
-    document.getElementById("modalTitulo").innerHTML =
-      "Erro na gravação";
+    document.getElementById("modalTitulo").innerHTML = "Erro na gravação";
 
     document.getElementById("modalTituloDiv").className =
       "modal-header text-danger";
@@ -142,11 +137,9 @@ function cadastrarDespesa() {
     document.getElementById("modalConteudo").innerHTML =
       "Existem campos obrigatórios que não foram preenchidos.";
 
-    document.getElementById("modalBtn").className =
-      "btn btn-danger";
+    document.getElementById("modalBtn").className = "btn btn-danger";
 
-    document.getElementById("modalBtn").innerHTML =
-      "Voltar e corrigir";
+    document.getElementById("modalBtn").innerHTML = "Voltar e corrigir";
 
     // Exibe o modal
     $("#modalRegistraDespesa").modal("show");
@@ -155,7 +148,6 @@ function cadastrarDespesa() {
 
 // Limpa todos os campos do formulário
 function limparCampos() {
-
   document.getElementById("ano").value = "";
   document.getElementById("mes").value = "";
   document.getElementById("dia").value = "";
@@ -166,7 +158,6 @@ function limparCampos() {
 
 // Carrega as despesas cadastradas na tabela
 function carregarListaDespesas() {
-
   // Recupera todas as despesas do LocalStorage
   let despesas = bd.recuperarTodosRegistros();
 
@@ -174,35 +165,41 @@ function carregarListaDespesas() {
   let listaDespesas = document.getElementById("listaDespesas");
 
   // Mapeamento dos tipos
-  const tipos = [
-    "",
-    "Alimentação",
-    "Educação",
-    "Lazer",
-    "Saúde",
-    "Transporte",
-  ];
+  const tipos = ["", "Alimentação", "Educação", "Lazer", "Saúde", "Transporte"];
 
   // Percorre cada despesa encontrada
   despesas.forEach(function (d) {
-
     // Cria uma nova linha na tabela
     let linha = listaDespesas.insertRow();
 
     // Coluna Data
-    linha.insertCell(0).innerHTML =
-      `${d.dia}/${d.mes}/${d.ano}`;
+    linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`;
 
     // Coluna Tipo
-    linha.insertCell(1).innerHTML =
-      tipos[d.tipo];
+    linha.insertCell(1).innerHTML = tipos[d.tipo];
 
     // Coluna Descrição
-    linha.insertCell(2).innerHTML =
-      d.descricao;
+    linha.insertCell(2).innerHTML = d.descricao;
 
     // Coluna Valor
-    linha.insertCell(3).innerHTML =
-      d.valor;
+    linha.insertCell(3).innerHTML = d.valor;
   });
+}
+
+function pesquisarDespesa() {
+  console.log("Pesquisar despesa");
+
+  // Recupera os campos do formulário
+  let ano = document.getElementById("ano").value;
+  let mes = document.getElementById("mes").value;
+  let dia = document.getElementById("dia").value;
+  let tipo = document.getElementById("tipo").value;
+  let descricao = document.getElementById("descricao").value;
+  let valor = document.getElementById("valor").value;
+
+  // Cria um objeto despesa com os dados de pesquisa
+  let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor);
+
+    // Chama o método de pesquisa do banco de dados
+    bd.pesquisar(despesa);
 }
