@@ -40,6 +40,31 @@ class Bd {
         localStorage.setItem(id, JSON.stringify(d));
         localStorage.setItem('id', id);
     }
+
+   recuperarTodosRegistros() {
+
+        let despesas = Array();
+
+        //console.log('estamos chegando até aqui');
+        let id = localStorage.getItem('id');
+
+        //recuperar todas as despesas cadastradas em localStorage
+        for (let i = 1; i <= id; i++) {            
+
+            //recuperar despesas
+            let despesa = JSON.parse(localStorage.getItem(i));
+
+            //existe a possibilidade de haver índices que foram pulados/removidos
+            if (despesa === null) {
+                continue;
+            }
+
+            despesas.push(despesa);
+            
+        }
+        //console.log(despesas);
+        return despesas;
+    }
 }
 
 let bd = new Bd();
@@ -83,5 +108,15 @@ function cadastrarDespesa() {
 
     //dialog('Erro na gravação', 'Existem campos obrigatórios que não foram preenchidos.', 'error');
     $('#modalRegistraDespesa').modal('show');
+
+    }
 }
+
+function carregarListaDespesas() {
+
+    let despesas = Array();
+    
+    despesas = bd.recuperarTodosRegistros();
+    console.log(despesas);
+
 }
