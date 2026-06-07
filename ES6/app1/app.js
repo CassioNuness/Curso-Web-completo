@@ -280,3 +280,4 @@ function pesquisarDespesa() {
   // Atualiza a tabela mostrando apenas as despesas filtradas
   carregarListaDespesas(despesasFiltradas, true);
 }
+
