@@ -63,11 +63,25 @@ function cadastrarDespesa() {
 
 
     if (despesa.validarDados()) {
-        bd.gravar(despesa);
-        //dialog de sucesso
-        $('#modalSucesso').modal('show');
-    }else {        
-        //dialog de erro
-        $('#modalRegistraDespesa').modal('show');
-    }
+    bd.gravar(despesa);
+
+    document.getElementById('modalTitulo').innerHTML = 'Registro inserido com sucesso';
+    document.getElementById('modalTituloDiv').className = 'modal-header text-success';
+    document.getElementById('modalConteudo').innerHTML = 'Despesa cadastrada com sucesso!';
+    document.getElementById('modalBtn').className = 'btn btn-success';
+    document.getElementById('modalBtn').innerHTML = 'Voltar';
+
+    //dialog('Registro inserido com sucesso', 'Despesa cadastrada com sucesso!', 'success');
+    $('#modalRegistraDespesa').modal('show');
+
+} else {
+    document.getElementById('modalTitulo').innerHTML = 'Erro na gravação';
+    document.getElementById('modalTituloDiv').className = 'modal-header text-danger';
+    document.getElementById('modalConteudo').innerHTML = 'Existem campos obrigatórios que não foram preenchidos.';
+    document.getElementById('modalBtn').className = 'btn btn-danger';
+    document.getElementById('modalBtn').innerHTML = 'Voltar e corrigir';
+
+    //dialog('Erro na gravação', 'Existem campos obrigatórios que não foram preenchidos.', 'error');
+    $('#modalRegistraDespesa').modal('show');
+}
 }
