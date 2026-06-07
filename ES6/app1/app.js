@@ -63,11 +63,11 @@ function cadastrarDespesa() {
 
 
     if (despesa.validarDados()) {
-        //bd.gravar(despesa);
+        bd.gravar(despesa);
         //dialog de sucesso
-        console.log('Gravado com sucesso');
-    }else {
+        $('#modalSucesso').modal('show');
+    }else {        
         //dialog de erro
-        console.log('Erro ao gravar despesa');
+        $('#modalRegistraDespesa').modal('show');
     }
 }
