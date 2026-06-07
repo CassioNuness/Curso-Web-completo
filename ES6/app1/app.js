@@ -67,6 +67,9 @@ class Bd {
         continue;
       }
 
+      // Adiciona o id da despesa para futuras referências
+        despesa.id = i;
+
       // Adiciona a despesa ao array
       despesas.push(despesa);
     }
@@ -117,6 +120,11 @@ class Bd {
 
     return despesasFiltradas;
   }
+
+    // Remove uma despesa do LocalStorage
+    remover(id) {
+        localStorage.removeItem(id);
+    }
 }
   
 
@@ -229,6 +237,27 @@ function carregarListaDespesas(despesas = Array(), filtro = false) {
 
     // Coluna Valor
     linha.insertCell(3).innerHTML = d.valor;
+
+    //criar o botão de exclusão
+    let btn = document.createElement("button");
+    btn.className = "btn btn-danger";
+    btn.innerHTML = '<i class="fas fa-times"></i>';
+    btn.id = `id_despesa_${d.id}`;
+    btn.onclick = function () {
+        //remover a despesa do LocalStorage
+        let id = this.id.replace("id_despesa_", "");
+
+        //alert(id);
+
+        bd.remover(id);
+
+        //recarregar a lista de despesas
+        window.location.reload();
+    }
+    linha.insertCell(4).appendChild(btn);
+
+    console.log(d);
+
   });
 }
 
