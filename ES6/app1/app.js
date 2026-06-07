@@ -14,6 +14,7 @@ class Despesa {
         return false;
       }
     }
+
     return true;
   }
 }
@@ -41,23 +42,18 @@ class Bd {
 
   recuperarTodosRegistros() {
     let despesas = Array();
-
-    //console.log('estamos chegando até aqui');
     let id = localStorage.getItem("id");
 
-    //recuperar todas as despesas cadastradas em localStorage
     for (let i = 1; i <= id; i++) {
-      //recuperar despesas
       let despesa = JSON.parse(localStorage.getItem(i));
 
-      //existe a possibilidade de haver índices que foram pulados/removidos
       if (despesa === null) {
         continue;
       }
 
       despesas.push(despesa);
     }
-    //console.log(despesas);
+
     return despesas;
   }
 }
@@ -78,7 +74,7 @@ function cadastrarDespesa() {
     dia.value,
     tipo.value,
     descricao.value,
-    valor.value,
+    valor.value
   );
 
   if (despesa.validarDados()) {
@@ -93,8 +89,9 @@ function cadastrarDespesa() {
     document.getElementById("modalBtn").className = "btn btn-success";
     document.getElementById("modalBtn").innerHTML = "Voltar";
 
-    //dialog('Registro inserido com sucesso', 'Despesa cadastrada com sucesso!', 'success');
     $("#modalRegistraDespesa").modal("show");
+
+    limparCampos();
   } else {
     document.getElementById("modalTitulo").innerHTML = "Erro na gravação";
     document.getElementById("modalTituloDiv").className =
@@ -104,52 +101,37 @@ function cadastrarDespesa() {
     document.getElementById("modalBtn").className = "btn btn-danger";
     document.getElementById("modalBtn").innerHTML = "Voltar e corrigir";
 
-    //dialog('Erro na gravação', 'Existem campos obrigatórios que não foram preenchidos.', 'error');
     $("#modalRegistraDespesa").modal("show");
   }
 }
 
+function limparCampos() {
+  document.getElementById("ano").value = "";
+  document.getElementById("mes").value = "";
+  document.getElementById("dia").value = "";
+  document.getElementById("tipo").value = "";
+  document.getElementById("descricao").value = "";
+  document.getElementById("valor").value = "";
+}
+
 function carregarListaDespesas() {
-  let despesas = Array();
-
-  despesas = bd.recuperarTodosRegistros();
-
-  //selecionar o elemento tbody da tabela
+  let despesas = bd.recuperarTodosRegistros();
   let listaDespesas = document.getElementById("listaDespesas");
 
-  /*
-                <tr id="listaDespesas">
-                    <td>15/03/2018</td>
-                    <td>Alimentação</td>
-                    <td>McDonalds</td>
-                    <td>R$ 32,00</td>
-                    <!-- <td><button class="btn btn-danger"><i class="fas fa-times"></i></button></td> -->
-              </tr>
-    */
+  const tipos = [
+    "",
+    "Alimentação",
+    "Educação",
+    "Lazer",
+    "Saúde",
+    "Transporte",
+  ];
 
-  //percorrer o array despesas, listando cada despesa de forma dinâmica
   despesas.forEach(function (d) {
-    console.log(d);
-
-    //criando a linha (tr)
     let linha = listaDespesas.insertRow();
 
-    //criando as colunas (td)
     linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`;
-    linha.insertCell(1).innerHTML = d.tipo;
-
-    //ajustar o tipo
-    const tipos = [
-      "",
-      "Alimentação",
-      "Educação",
-      "Lazer",
-      "Saúde",
-      "Transporte",
-    ];
-
     linha.insertCell(1).innerHTML = tipos[d.tipo];
-
     linha.insertCell(2).innerHTML = d.descricao;
     linha.insertCell(3).innerHTML = d.valor;
   });
