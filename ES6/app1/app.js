@@ -74,11 +74,51 @@ class Bd {
     return despesas;
   }
 
+  // Pesquisa despesas com base nos filtros preenchidos
   pesquisar(despesa) {
-     console.log(despesa);
-  }
+    // Primeiro recupera todas as despesas cadastradas
+    let despesasFiltradas = this.recuperarTodosRegistros();
 
+    // Filtra por ano, se o campo foi preenchido
+    if (despesa.ano !== "") {
+      despesasFiltradas = despesasFiltradas.filter((d) => d.ano == despesa.ano);
+    }
+
+    // Filtra por mês, se o campo foi preenchido
+    if (despesa.mes !== "") {
+      despesasFiltradas = despesasFiltradas.filter((d) => d.mes == despesa.mes);
+    }
+
+    // Filtra por dia, se o campo foi preenchido
+    if (despesa.dia !== "") {
+      despesasFiltradas = despesasFiltradas.filter((d) => d.dia == despesa.dia);
+    }
+
+    // Filtra por tipo, se o campo foi preenchido
+    if (despesa.tipo !== "") {
+      despesasFiltradas = despesasFiltradas.filter(
+        (d) => d.tipo == despesa.tipo,
+      );
+    }
+
+    // Filtra por descrição, se o campo foi preenchido
+    if (despesa.descricao !== "") {
+      despesasFiltradas = despesasFiltradas.filter(
+        (d) => d.descricao == despesa.descricao,
+      );
+    }
+
+    // Filtra por valor, se o campo foi preenchido
+     if (despesa.valor !== "") {
+      despesasFiltradas = despesasFiltradas.filter(
+        (d) => d.valor == despesa.valor
+      );
+    }
+
+    return despesasFiltradas;
+  }
 }
+  
 
 // Instancia do banco de dados
 let bd = new Bd();
@@ -156,13 +196,19 @@ function limparCampos() {
   document.getElementById("valor").value = "";
 }
 
-// Carrega as despesas cadastradas na tabela
-function carregarListaDespesas() {
-  // Recupera todas as despesas do LocalStorage
-  let despesas = bd.recuperarTodosRegistros();
+// Carrega as despesas cadastradas ou filtradas na tabela
+function carregarListaDespesas(despesas = Array(), filtro = false) {
+  // Se não receber um array de despesas, carrega todas do LocalStorage
+  if (despesas.length === 0 && filtro === false) {
+    despesas = bd.recuperarTodosRegistros();
+  }
 
   // Seleciona o tbody da tabela
   let listaDespesas = document.getElementById("listaDespesas");
+
+  // Limpa a tabela antes de montar novamente
+  // Isso evita duplicar linhas ao pesquisar
+  listaDespesas.innerHTML = "";
 
   // Mapeamento dos tipos
   const tipos = ["", "Alimentação", "Educação", "Lazer", "Saúde", "Transporte"];
@@ -186,10 +232,9 @@ function carregarListaDespesas() {
   });
 }
 
+// Função responsável por pesquisar despesas
 function pesquisarDespesa() {
-  console.log("Pesquisar despesa");
-
-  // Recupera os campos do formulário
+  // Recupera os campos do formulário de consulta
   let ano = document.getElementById("ano").value;
   let mes = document.getElementById("mes").value;
   let dia = document.getElementById("dia").value;
@@ -200,6 +245,9 @@ function pesquisarDespesa() {
   // Cria um objeto despesa com os dados de pesquisa
   let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor);
 
-    // Chama o método de pesquisa do banco de dados
-    bd.pesquisar(despesa);
+  // Pesquisa as despesas com base nos filtros preenchidos
+  let despesasFiltradas = bd.pesquisar(despesa);
+
+  // Atualiza a tabela mostrando apenas as despesas filtradas
+  carregarListaDespesas(despesasFiltradas, true);
 }
