@@ -15,8 +15,12 @@
         ?>
 
 		<br />
-
+		
 		<?= "utilizando a tag de impressão do php" ?>
+
+		<br />
+
+		<? echo "utilizando a tag curta" ?>
         
 	</body>	
 
