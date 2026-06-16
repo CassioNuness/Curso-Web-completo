@@ -23,6 +23,9 @@
 
 			//boolean
 			$fumante_sn = true; //(true = 1) ou (false = vazio)
+
+			//...logica...//
+			$idade = 33;
 			
         ?>
 
