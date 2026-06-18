@@ -19,6 +19,7 @@
            echo BD_URL . '<br/>';
            echo BD_USUARIO . '<br/>';
            echo BD_SENHA . '<br/>';
+           
 			
         ?>
 
