@@ -35,6 +35,8 @@
 
     <p>Possui cartão da loja?
         <?php
+
+        
         if ($usuario_possui_cartao_loja == true) {
             echo 'Sim';
         } else {
