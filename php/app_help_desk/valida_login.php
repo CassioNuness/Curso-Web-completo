@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+
+
 // Variável responsável por indicar
 // se o usuário conseguiu fazer login.
 //
@@ -47,12 +50,14 @@ foreach($usuarios_app as $user) {
 // Depois que terminou de percorrer
 // todos os usuários,
 // verifica se encontrou alguém.
-if($usuario_autenticado) {
+if ($usuario_autenticado) {
 
     echo 'Usuário autenticado';
+    $_SESSION['autenticado'] = 'SIM';
 
 } else {
 
+    $_SESSION['autenticado'] = 'NAO';
     header('Location: index.php?login=erro');
 
 }
