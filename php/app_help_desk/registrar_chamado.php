@@ -24,4 +24,5 @@ fclose($arquivo);
 // echo $texto;
 header('Location: abrir_chamado.php');
 
+
 ?>
