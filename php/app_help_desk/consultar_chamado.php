@@ -1,4 +1,63 @@
-<? require_once "validador_acesso.php"; ?>
+<?php
+
+// Verifica se o usuário está autenticado.
+require_once "validador_acesso.php";
+
+// ====================================================
+// Leitura do arquivo contendo os chamados.
+// ====================================================
+
+// Abre o arquivo "arquivo.hd" em modo de leitura ('r').
+$arquivo = fopen('arquivo.hd', 'r');
+
+// Array que armazenará todos os chamados.
+$chamados = [];
+
+// Verifica se o arquivo foi aberto com sucesso.
+if ($arquivo) {
+
+    // Enquanto não chegar ao final do arquivo...
+    while (!feof($arquivo)) {
+
+        // Lê uma linha do arquivo.
+        $linha = fgets($arquivo);
+
+        // Ignora linhas vazias.
+        if (!empty($linha)) {
+
+            // Cada linha possui este formato:
+            //
+            // Título#Categoria#Descrição
+            //
+            // explode() quebra a string utilizando '#'
+            // como separador.
+            $dados = explode('#', $linha);
+
+            // Cria um array associativo para representar
+            // um chamado e adiciona ao array principal.
+            $chamados[] = [
+
+                'titulo'     => $dados[0],
+                'categoria'  => $dados[1],
+                'descricao'  => $dados[2]
+
+            ];
+
+        }
+
+    }
+
+    // Fecha o arquivo para liberar recursos do sistema.
+    fclose($arquivo);
+
+}
+
+// Apenas para testes.
+// echo "<pre>";
+// print_r($chamados);
+// echo "</pre>";
+
+?>
 
 <html>
   <head>
@@ -40,24 +99,19 @@
             </div>
             
             <div class="card-body">
-              
+
+              <?php foreach ($chamados as $chamado) { ?>
+
               <div class="card mb-3 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
+                  <h5 class="card-title"><?= $chamado['titulo'] ?></h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><?= $chamado['categoria'] ?></h6>
+                  <p class="card-text"><?= $chamado['descricao'] ?></p>
 
                 </div>
               </div>
 
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
-                </div>
-              </div>
+              <?php } ?>
 
               <div class="row mt-5">
                 <div class="col-6">
