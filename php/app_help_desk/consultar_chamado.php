@@ -2,7 +2,7 @@
 
 require_once "validador_acesso.php";
 
-// Array que armazenará todos os chamados válidos
+// Array que armazenará somente os chamados permitidos
 $chamados = [];
 
 // Abre o arquivo em modo de leitura
@@ -10,32 +10,43 @@ $arquivo = fopen('arquivo.hd', 'r');
 
 if ($arquivo) {
 
-  // Lê cada linha enquanto ainda existir conteúdo no arquivo
-  while (($linha = fgets($arquivo)) !== false) {
+    // Lê o arquivo linha por linha
+    while (($linha = fgets($arquivo)) !== false) {
 
-    // Remove espaços e quebras de linha do início e do final
-    $linha = trim($linha);
+        // Remove espaços e quebras de linha
+        $linha = trim($linha);
 
-    // Ignora linhas vazias
-    if ($linha === '') {
-      continue;
+        // Ignora linhas vazias
+        if ($linha === '') {
+            continue;
+        }
+
+        // Divide a linha:
+        // 0 = ID do usuário
+        // 1 = título
+        // 2 = categoria
+        // 3 = descrição
+        $dados = explode('#', $linha);
+
+        // Ignora registros incompletos
+        if (count($dados) < 4) {
+            continue;
+        }
+
+        // Se for usuário comum, permite apenas chamados próprios
+        if (
+            $_SESSION['perfil_id'] == 2 &&
+            $_SESSION['usuario_id'] != $dados[0]
+        ) {
+            continue;
+        }
+
+        // Administrador chega aqui com todos os chamados.
+        // Usuário comum chega apenas com os próprios chamados.
+        $chamados[] = $dados;
     }
 
-    // Separa os dados pelo caractere #
-    $dados = explode('#', $linha);
-
-    // Só adiciona registros que possuem os quatro campos:
-    // 0 = ID
-    // 1 = título
-    // 2 = categoria
-    // 3 = descrição
-    if (count($dados) >= 4) {
-      $chamados[] = $dados;
-    }
-  }
-
-  // Fecha o arquivo após terminar a leitura
-  fclose($arquivo);
+    fclose($arquivo);
 }
 
 ?>
@@ -83,24 +94,6 @@ if ($arquivo) {
           <div class="card-body">
 
             <?php foreach ($chamados as $chamado) { ?>
-
-              <?php
-
-              // Se o usuário for comum, perfil 2,
-              // ele só poderá visualizar os próprios chamados.
-              if ($_SESSION['perfil_id'] == 2) {
-
-                // Compara o ID do usuário logado
-                // com o ID do usuário que abriu o chamado.
-                if ($_SESSION['usuario_id'] != $chamado[0]) {
-
-                  // Se o chamado não pertencer ao usuário,
-                  // ignora este registro e passa para o próximo.
-                  continue;
-                }
-              }
-
-              ?>
 
               <div class="card mb-3 bg-light">
                 <div class="card-body">
