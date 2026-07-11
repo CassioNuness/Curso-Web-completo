@@ -1,127 +1,140 @@
 <?php
 
-// Verifica se o usuário está autenticado.
 require_once "validador_acesso.php";
 
-// ====================================================
-// Leitura do arquivo contendo os chamados.
-// ====================================================
-
-// Abre o arquivo "arquivo.hd" em modo de leitura ('r').
-$arquivo = fopen('arquivo.hd', 'r');
-
-// Array que armazenará todos os chamados.
+// Array que armazenará todos os chamados válidos
 $chamados = [];
 
-// Verifica se o arquivo foi aberto com sucesso.
+// Abre o arquivo em modo de leitura
+$arquivo = fopen('arquivo.hd', 'r');
+
 if ($arquivo) {
 
-    // Enquanto não chegar ao final do arquivo...
-    while (!feof($arquivo)) {
+  // Lê cada linha enquanto ainda existir conteúdo no arquivo
+  while (($linha = fgets($arquivo)) !== false) {
 
-        // Lê uma linha do arquivo.
-        $linha = fgets($arquivo);
+    // Remove espaços e quebras de linha do início e do final
+    $linha = trim($linha);
 
-        // Ignora linhas vazias.
-        if (!empty($linha)) {
-
-            // Cada linha possui este formato:
-            //
-            // Título#Categoria#Descrição
-            //
-            // explode() quebra a string utilizando '#'
-            // como separador.
-            $dados = explode('#', $linha);
-
-            // Cria um array associativo para representar
-            // um chamado e adiciona ao array principal.
-            $chamados[] = [
-
-                'titulo'     => $dados[0],
-                'categoria'  => $dados[1],
-                'descricao'  => $dados[2]
-
-            ];
-
-        }
-
+    // Ignora linhas vazias
+    if ($linha === '') {
+      continue;
     }
 
-    // Fecha o arquivo para liberar recursos do sistema.
-    fclose($arquivo);
+    // Separa os dados pelo caractere #
+    $dados = explode('#', $linha);
 
+    // Só adiciona registros que possuem os quatro campos:
+    // 0 = ID
+    // 1 = título
+    // 2 = categoria
+    // 3 = descrição
+    if (count($dados) >= 4) {
+      $chamados[] = $dados;
+    }
+  }
+
+  // Fecha o arquivo após terminar a leitura
+  fclose($arquivo);
 }
-
-// Apenas para testes.
-// echo "<pre>";
-// print_r($chamados);
-// echo "</pre>";
 
 ?>
 
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>App Help Desk</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<head>
+  <meta charset="utf-8" />
+  <title>App Help Desk</title>
 
-    <style>
-      .card-consultar-chamado {
-        padding: 30px 0 0 0;
-        width: 100%;
-        margin: 0 auto;
-      }
-    </style>
-  </head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <body>
+  <style>
+    .card-consultar-chamado {
+      padding: 30px 0 0 0;
+      width: 100%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
 
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">
-        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        App Help Desk
-      </a>
-            <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="logoff.php">SAIR</a>
-        </li>
-      </ul>
-    </nav>
+<body>
 
-    <div class="container">    
-      <div class="row">
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      App Help Desk
+    </a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="logoff.php">SAIR</a>
+      </li>
+    </ul>
+  </nav>
 
-        <div class="card-consultar-chamado">
-          <div class="card">
-            <div class="card-header">
-              Consulta de chamado
-            </div>
-            
-            <div class="card-body">
+  <div class="container">
+    <div class="row">
 
-              <?php foreach ($chamados as $chamado) { ?>
+      <div class="card-consultar-chamado">
+        <div class="card">
+          <div class="card-header">
+            Consulta de chamados
+          </div>
+
+          <div class="card-body">
+
+            <?php foreach ($chamados as $chamado) { ?>
+
+              <?php
+
+              // Se o usuário for comum, perfil 2,
+              // ele só poderá visualizar os próprios chamados.
+              if ($_SESSION['perfil_id'] == 2) {
+
+                // Compara o ID do usuário logado
+                // com o ID do usuário que abriu o chamado.
+                if ($_SESSION['usuario_id'] != $chamado[0]) {
+
+                  // Se o chamado não pertencer ao usuário,
+                  // ignora este registro e passa para o próximo.
+                  continue;
+                }
+              }
+
+              ?>
 
               <div class="card mb-3 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title"><?= $chamado['titulo'] ?></h5>
-                  <h6 class="card-subtitle mb-2 text-muted"><?= $chamado['categoria'] ?></h6>
-                  <p class="card-text"><?= $chamado['descricao'] ?></p>
+
+                  <!-- Índice 1: título do chamado -->
+                  <h5 class="card-title">
+                    <?= htmlspecialchars($chamado[1]) ?>
+                  </h5>
+
+                  <!-- Índice 2: categoria do chamado -->
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    <?= htmlspecialchars($chamado[2]) ?>
+                  </h6>
+
+                  <!-- Índice 3: descrição do chamado -->
+                  <p class="card-text">
+                    <?= htmlspecialchars($chamado[3]) ?>
+                  </p>
 
                 </div>
               </div>
 
-              <?php } ?>
+            <?php } ?>
 
-              <div class="row mt-5">
-                <div class="col-6">
-                  <a class="btn btn-lg btn-warning btn-block" href="home.php">Voltar</a>
-                </div>
+            <div class="row mt-5">
+              <div class="col-6">
+                <a class="btn btn-lg btn-warning btn-block" href="home.php">Voltar</a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

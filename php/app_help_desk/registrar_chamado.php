@@ -1,16 +1,14 @@
 <?php
 // Lógica para registrar o chamado
 
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
+session_start();
 
 //estamos trabalhando na montagem do texto que será gravado no arquivo
 $titulo = str_replace('#', '-', $_POST['titulo']);
 $categoria = str_replace('#', '-', $_POST['categoria']);
 $descricao = str_replace('#', '-', $_POST['descricao']);
 
-$texto = $titulo . '#' . $categoria . '#' . $descricao . PHP_EOL;
+$texto = $_SESSION['usuario_id'] . '#' . $titulo . '#' . $categoria . '#' . $descricao . PHP_EOL;
 
 //abrindo o arquivo.hd para acrescentar informações
 $arquivo = fopen('arquivo.hd', 'a');
