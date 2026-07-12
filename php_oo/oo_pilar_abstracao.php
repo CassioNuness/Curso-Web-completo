@@ -118,5 +118,6 @@ echo $x->__get('nome') .
      $x->__get('cargo') .
      ' e o salário que recebe é: ' .
      $x->__get('salario');
+     
 
 ?>
