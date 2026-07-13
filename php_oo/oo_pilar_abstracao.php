@@ -47,7 +47,17 @@ class Funcionario {
 
     //métodos
     function resumirCadFunc() {
-        return "$this->nome possui $this->numFilhos filho(s)";
+        return 
+        $this->__get('nome') .
+        " possui " . 
+        $this->__get('numFilhos') . 
+        " filho(s) " .
+        " e o número de telefone é: " .
+        $this->__get('telefone') .
+        " e trabalha como: " .
+        $this->__get('cargo') .
+        " e o salário que recebe é dê: " .
+        $this->__get('salario');
     }
 
     function modificarNumFilhos($numFilhos) {
@@ -66,7 +76,7 @@ $y->setTelefone('31 9 9300 6412');
 echo $y->getNome() .
      ' possui ' .
      $y->getNumFilhos() .
-     ' filho(s) e meu número é: ' .
+     ' filho(s) e o número de telefone é: ' .
      $y->getTelefone();
 
 echo '<hr />';
@@ -78,7 +88,7 @@ $x->setTelefone('31 9 9300 0209');
 echo $x->getNome() .
      ' possui ' .
      $x->getNumFilhos() .
-     ' filho(s) e meu número é: ' .
+     ' filho(s) e o número de telefone é: ' .
      $x->getTelefone();
 
 */
@@ -89,16 +99,16 @@ $y->__set('numFilhos', 2);
 $y->__set('telefone', '31 9 9300 6412');
 $y->__set('cargo', 'Programador jr');
 $y->__set('salario', '3000');
-// echo $y->resumirCadFunc();
-echo $y->__get('nome') .
-     ' possui ' .
-     $y->__get('numFilhos') .
-     ' filho(s) e o número é: ' .
-     $y->__get('telefone') . 
-     ' e trabalha como: ' .
-     $y->__get('cargo') .
-     ' e o salário que recebe é: ' .
-     $y->__get('salario');
+echo $y->resumirCadFunc();
+// echo $y->__get('nome') .
+//      ' possui ' .
+//      $y->__get('numFilhos') .
+//      ' filho(s) e o número é: ' .
+//      $y->__get('telefone') . 
+//      ' e trabalha como: ' .
+//      $y->__get('cargo') .
+//      ' e o salário que recebe é dê: ' .
+//      $y->__get('salario');
 
 echo '<hr />';
 
@@ -108,16 +118,16 @@ $x->__set('numFilhos', 0);
 $x->__set('telefone', '31 9 9301 6522');
 $x->__set('cargo', 'Professor(a)');
 $x->__set('salario', '4500');
-// echo $y->resumirCadFunc();
-echo $x->__get('nome') .
-     ' possui ' .
-     $x->__get('numFilhos') .
-     ' filho(s) e o número é: ' .
-     $x->__get('telefone') . 
-     ' e trabalha como: ' .
-     $x->__get('cargo') .
-     ' e o salário que recebe é: ' .
-     $x->__get('salario');
-     
+echo $x->resumirCadFunc();
+// echo $x->__get('nome') .
+//      ' possui ' .
+//      $x->__get('numFilhos') .
+//      ' filho(s) e o número é: ' .
+//      $x->__get('telefone') . 
+//      ' e trabalha como: ' .
+//      $x->__get('cargo') .
+//      ' e o salário que recebe é: ' .
+//      $x->__get('salario');
+
 
 ?>
