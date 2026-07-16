@@ -18,7 +18,10 @@
     // echo '<br />';
     // Exemplo::metodo1();
 
-    $x = new Exemplo();
-    echo $x->atributo2;
+    // $x = new Exemplo();
+    // echo $x->atributo2;
+
+    echo Exemplo::$atributo1;
+    
 
 ?>
