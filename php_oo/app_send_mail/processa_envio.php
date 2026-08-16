@@ -51,7 +51,7 @@
 			//Server settings
 			$mail->SMTPDebug = 2;                      //Enable verbose debug output
 			$mail->isSMTP();                                            //Send using SMTP
-			$mail->Host       = 'smtp.example.com';                     //Set the SMTP server to send through
+			$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 			$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
 			$mail->Username   = 'cassio.leonard@gmail.com';                     //SMTP username
 			$mail->Password   = 'iinlihdtippcxqxs';                               //SMTP password
@@ -60,7 +60,7 @@
 
 			//Recipients
 			$mail->setFrom('cassio.leonard@gmail.com', 'Cassio Leonard');
-			$mail->addAddress('cassio.leonard@gmail.com', 'Cassio Leonard Desenvolvedor');     //Add a recipient
+			$mail->addAddress($mensagem->__get('para'));     //Add a recipient
 			//$mail->addReplyTo('cassio.leonard@gmail.com', 'Cassio Leonard');
 			//$mail->addCC('cc@example.com');
 			//$mail->addBCC('bcc@example.com');
@@ -71,12 +71,13 @@
 
 			//Content
 			$mail->isHTML(true);                                  //Set email format to HTML
-			$mail->Subject = 'Oi. Eu sou o assunto';
-			$mail->Body    = 'Oi. Eu sou o corpo da mensagem';
-			$mail->AltBody = 'Oi. Eu sou o conteúdo do e-mail';
+			$mail->Subject = $mensagem->__get('assunto');
+			$mail->Body    = $mensagem->__get('mensagem');
+			$mail->AltBody = 'E necessario utilizar um client que suporte HTML para ter acesso total ao conteúdo dessa mensagem';
 
 			$mail->send();
-			echo 'Message has been sent';
+			echo 'E-mail enviado com sucesso!';
+
 	} catch (Exception $e) {
 			echo "Não foi possivel enviar este e-mail! Por favor tente novamente mais tarde.";
 			echo 'Detalhes do erro: ' . $mail->ErrorInfo;
