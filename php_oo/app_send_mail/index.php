@@ -1,3 +1,11 @@
+<?php if (isset($_GET['erro']) && $_GET['erro'] === 'campos') { ?>
+
+    <div class="alert alert-danger">
+        Preencha todos os campos antes de enviar.
+    </div>
+
+<?php } ?>
+
 <html>
 	<head>
 		<meta charset="utf-8" />
