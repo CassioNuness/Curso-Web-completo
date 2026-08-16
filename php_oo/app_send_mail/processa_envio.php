@@ -6,6 +6,8 @@
 	require "./bibliotecas/PHPMailer/POP3.php";
 	require "./bibliotecas/PHPMailer/SMTP.php";
 
+    $config = require __DIR__ . '/config.php';
+
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\Exception;
 
@@ -54,15 +56,15 @@
 			$mail->isSMTP();                                            //Send using SMTP
 			$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 			$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-			$mail->Username   = 'cassio.leonard@gmail.com';                     //SMTP username
-			$mail->Password   = 'iinlihdtippcxqxs';                               //SMTP password
+			$mail->Username   = $config['email'];                     //SMTP username
+			$mail->Password   = $config['senha_app'];                               //SMTP password
 			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 			$mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
 			//Recipients
-			$mail->setFrom('cassio.leonard@gmail.com', 'Cassio Leonard');
+			$mail->setFrom($config['email'], 'Cassio Leonard');
 			$mail->addAddress($mensagem->__get('para'));     //Add a recipient
-			//$mail->addReplyTo('cassio.leonard@gmail.com', 'Cassio Leonard');
+			//$mail->addReplyTo($config['email'], 'Cassio Leonard');
 			//$mail->addCC('cc@example.com');
 			//$mail->addBCC('bcc@example.com');
 
