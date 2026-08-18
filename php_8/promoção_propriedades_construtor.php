@@ -73,6 +73,6 @@
 
     echo "Produto: " . $produto2->nome;
     echo "<br>";
-    echo "Valor: " . $produto2->valor;
+    echo "Valor: " . $produto2->valor;    
 
 ?>
