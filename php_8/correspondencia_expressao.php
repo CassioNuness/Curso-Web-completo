@@ -25,15 +25,27 @@
 
     // MATCH - PHP 8
     // Faz comparação estrita (===)
-    $retornoMatch = match ($busca) {
+    /*$retornoMatch = match ($busca) {
 
         '1' => "Encontrou o texto 1",
 
-        2 => "Encontrou o número 2",
+        1 => "Encontrou o número 2",
+
+        5, '8', 12, 'X', => "Encontrou o valor 5 ou 12 ou os textos 8 ou X",
 
         default => "Não encontrou"
     };
+    */
 
+    // Match com condicionais e operadores lógicos
+    $retornoMatch = match (true) {
+
+        $busca < 20 => "Encontrou",
+
+        $busca >= 20 && $busca <= 30 => "Encontrou um valor maior que 20 e menor que 30", 
+
+        default => "Não encontrou"
+    };
 
     echo "Resultado match: " . $retornoMatch;
 
