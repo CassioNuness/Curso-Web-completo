@@ -1,6 +1,5 @@
 <?php
 
-    // Configurações do banco PostgreSQL
     $host = 'localhost';
     $porta = '5432';
     $banco = 'php_com_pdo';
@@ -9,7 +8,6 @@
 
     try {
 
-        // Conexão com PostgreSQL utilizando PDO
         $pdo = new PDO(
             "pgsql:host=$host;port=$porta;dbname=$banco",
             $usuario,
@@ -23,8 +21,9 @@
 
     } catch (PDOException $e) {
 
-        echo "Falha ao conectar ao banco de dados.<br>";
-        die($e->getMessage());
+        echo "Erro: " . $e->getCode() . "<br>";
+        echo "Mensagem: " . $e->getMessage();
 
     }
+
 ?>
