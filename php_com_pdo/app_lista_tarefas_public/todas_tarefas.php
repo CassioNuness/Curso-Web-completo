@@ -38,7 +38,7 @@
 				inputId.name = 'id'
 				inputId.value = id
 
-				//criar um input hidden para guardar o id da tarefa	
+				// criar o botão para atualizar a tarefa
 				let button = document.createElement('button')
 				button.type = 'submit'
 				button.className = 'col-3 btn btn-info'
