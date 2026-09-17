@@ -20,7 +20,7 @@
         public function recuperar() {
 
             $query = '
-                SELECT 
+                SELECT  
                     t.id,
                     t.id_status,
                     s.status,
@@ -28,6 +28,7 @@
                 FROM tb_tarefas AS t
                 LEFT JOIN tb_status AS s
                     ON t.id_status = s.id
+                ORDER BY t.id ASC
             ';
 
             $stmt = $this->conexao->prepare($query);
@@ -35,9 +36,13 @@
 
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
-
         public function atualizar() {
 
+            $query = 'update tb_tarefas set tarefa = :tarefa where id = :id';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':tarefa', $this->tarefa->__get('tarefa'));
+            $stmt->bindValue(':id', $this->tarefa->__get('id'));
+            return $stmt->execute();
         }
 
         public function remover() {
