@@ -5,7 +5,18 @@
 		<title>jQuery</title>
 
 		<style>
-			
+			#divExterna {
+				background-color: #ccc;
+				width: 80px;
+				height: 80px;
+				padding: 70px;
+			}
+
+			#divInterna {
+				width: 80px;
+				height: 80px;
+				background-color: blue;
+			}
 		</style>
 
 		<script src="jquery-4.0.0.min.js"></script>
@@ -25,6 +36,67 @@
 				$('#div1').scroll(e => {
 					$(e.target).css('background-color', 'blue')
 				})
+
+				$('#btn1').mousedown(() => {
+					$('#div2').css('background-color', 'green')
+				})
+
+				$('#btn1').click(() => {
+					$('#div2').css('background-color', 'blue')
+				})
+
+				$('#btn2').dblclick(() => {
+					$('#div2').css('background-color', 'yellow')
+				})
+
+				$('#div2').mousemove((e) => {
+					$('#resultadoDiv').html('X: ' + e.offsetX + ' / Y: ' + e.offsetY)
+				})
+
+				/* mouseouver / mouseout (antigos) */
+				/*
+				$('#divExterna').mouseover(() => {
+					$('#resultadoDiv1').html('entrou')
+					console.log('Div Externa (entrou)')
+				})
+
+				$('#divExterna').mouseout(() => {
+					$('#resultadoDiv1').html('saiu')
+					console.log('Div Externa (saiu)')
+				})
+
+				$('#divInterna').mouseover(() => {
+					$('#resultadoDiv2').html('entrou')
+					console.log('Div Interna (entrou)')
+				})
+
+				$('#divInterna').mouseout(() => {
+					$('#resultadoDiv2').html('saiu')
+					console.log('Div Iterna (saiu)')
+				})
+				*/
+
+				/* mouseenter / mouseleave (novos) */
+				$('#divExterna').mouseenter(() => {
+					$('#resultadoDiv1').html('entrou')
+					console.log('Div Externa (entrou)')
+				})
+
+				$('#divExterna').mouseleave(() => {
+					$('#resultadoDiv1').html('saiu')
+					console.log('Div Externa (saiu)')
+				})
+
+				$('#divInterna').mouseenter(() => {
+					$('#resultadoDiv2').html('entrou')
+					console.log('Div Interna (entrou)')
+				})
+
+				$('#divInterna').mouseleave(() => {
+					$('#resultadoDiv2').html('saiu')
+					console.log('Div Interna (saiu)')
+				})
+				
 			})
 		</script>
 	</head>
@@ -46,10 +118,17 @@
 			<hr />
 
 			<h3>Mouse</h3>
-			<button type="button">Clique aqui</button>
-			<button type="button">Clique aqui 2x</button>
-			<div style="background-color: red; width: 80px; height: 50px; margin-top: 10px; margin-bottom: 10px"></div>
-			<span>Resultado do evento sobre a div</span>
+			<button id="btn1" type="button">Clique aqui</button>
+			<button id="btn2" type="button">Clique aqui 2x</button>
+			<div id="div2" style="background-color: red; width: 80px; height: 50px; margin-top: 10px; margin-bottom: 10px"></div>
+			<span>Resultado do evento sobre a div</span><span id="resultadoDiv"></span>
+
+			<div id="divExterna">
+				<div id="divInterna"></div>
+			</div>
+			<span>Div Externa: </span><span id="resultadoDiv1"></span>
+			<br />
+			<span>Div Interna: </span><span id="resultadoDiv2"></span>
 			<hr />
 
 			<h3>Teclado</h3>
