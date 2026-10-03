@@ -1,0 +1,19 @@
+{
+    "name": "cassio/miniframework",
+    "require": {
+        "php": ">=7.4"
+    },
+    "authors": [
+        {
+            "name": "Cassio Nunes",
+            "email": "cassio.dev.test@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "MF\\": "vendor/MF/A"
+        }
+    }
+
+}
