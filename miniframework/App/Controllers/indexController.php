@@ -14,7 +14,7 @@
                 'Cadeira',
                 'Mesa',
             );
-            $this->render('index');
+            $this->render('index', 'layout1');
         }
 
         public function sobreNos()
@@ -24,7 +24,7 @@
                 'guarda-roupa',
             );
 
-            $this->render('sobreNos');
+            $this->render('sobreNos', 'layout1');
         }
     }
 
