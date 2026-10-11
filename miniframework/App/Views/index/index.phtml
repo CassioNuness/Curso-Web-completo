@@ -2,9 +2,9 @@
 <hr />
 
 <?php
-    
-    foreach ($this->view->dados as $indice => $valor) {
-        echo "O indice é: $indice e o valor é: $valor <br />";
+
+    foreach ($this->view->produtos as $indice => $valor) {
+        echo "O índice é: $indice e o produto é: {$valor['descricao']} - Preço: R$ {$valor['preco']} <br />";
     }
 
 ?>

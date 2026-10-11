@@ -14,7 +14,7 @@
         protected function render($view, $layout1) {
             $this->view->page = $view;
 
-            if(file_existes("../App/Views/".$layout1.".phtml")) {
+            if(file_exists("../App/Views/".$layout1.".phtml")) {
                 require_once "../App/Views/".$layout1.".phtml";
             } else {
                 $this->content();
