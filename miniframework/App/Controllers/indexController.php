@@ -2,43 +2,36 @@
 
     namespace App\Controllers;
 
+    //Os recursos do framework são importados para dentro do controller
     use MF\Controller\Action;
-    use App\Connection;
-    use App\Models\Produto;
+    use MF\Model\Container;
 
+    //Os models que serão utilizados 
+    use App\Models\Produto;
+    use App\Models\Info;
+
+    
     class indexController extends Action
     {
 
         public function index()
         {
-            // $this->view->dados = array(
-            //     'Sofa',
-            //     'Cadeira',
-            //     'Mesa',
-            // );
+            $produtos = Container::getModel('Produto');
 
-            //instancia de conexão com o banco de dados
-            $conn = new Connection();
-            $db = $conn->getDb();
-
-            //instancia do model Produto
-            $produto = new Produto($db);
-
-            $produtos = $produto->getAllProdutos();
+            $produtos = $produtos->getProdutos();
 
             $this->view->dados = $produtos;
-
-            $this->view->produtos = $produtos;
 
             $this->render('index', 'layout1');
         }
 
         public function sobreNos()
         {
-            // $this->view->dados = array(
-            //     'cama',
-            //     'guarda-roupa',
-            // );
+            $info = Container::getModel('Info');
+
+            $informacoes = $info->getInfo();
+
+            $this->view->dados = $informacoes;
 
             $this->render('sobreNos', 'layout1');
         }
