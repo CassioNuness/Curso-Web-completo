@@ -18,9 +18,9 @@
         {
             $produtos = Container::getModel('Produto');
 
-            $produtos = $produtos->getProdutos();
+            $produtos = $produtos->getAllProdutos();
 
-            $this->view->dados = $produtos;
+            $this->view->produtos = $produtos;
 
             $this->render('index', 'layout1');
         }

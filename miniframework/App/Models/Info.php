@@ -3,14 +3,9 @@
     namespace App\Models;
 
     use PDO;
+    use MF\Model\Model;
 
-    class Info {
-        
-        protected $db;
-
-        public function __construct(PDO $db) {
-            $this->db = $db;
-        }
+    class Info extends Model {
 
         public function getInfo() {
             $stmt = $this->db->prepare("SELECT titulo, descricao FROM tb_info");

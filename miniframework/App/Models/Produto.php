@@ -3,15 +3,10 @@
     namespace App\Models;
 
     use PDO;
+    use MF\Model\Model;
 
-    class Produto {
+    class Produto extends Model {
         
-        protected $db;
-
-        public function __construct(PDO $db) {
-            $this->db = $db;
-        }
-
         public function getAllProdutos() {
             $stmt = $this->db->prepare("SELECT * FROM tb_produtos");
             $stmt->execute();
