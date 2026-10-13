@@ -10,24 +10,23 @@
         //(estático) carregando o módulo antes da necessidade de utilizá-lo
         //import { saudacao, getEnderecoByCEP } from './import/lib.mjs'
 
-        document.querySelector('#btnSaudacao').addEventListener('click', () => {
+        document.querySelector('#btnSaudacao').addEventListener('click', async () => {
             
-            import('./import/lib.mjs')
-                .then(module => console.log(module.saudacao()))
+            const modulo = await import('./import/lib.mjs') //promise
+            console.log(modulo.saudacao())
             
         })
 
-        document.querySelector('#btnCEP').addEventListener('click', () => {
+        document.querySelector('#btnCEP').addEventListener('click', async () => {
             
             let cep = document.querySelector('#cep').value
 
             if(cep.length == 8) {
 
-                import('./import/lib2.mjs')
-                    .then(x => {
-                        x.getEnderecoByCEP(cep)
-                            .then(dados => console.log(dados))
-                    })
+                let x = await import('./import/lib2.mjs') //promise
+
+                x.getEnderecoByCEP(cep)
+                    .then(dados => console.log(dados))
             }
         })
 
