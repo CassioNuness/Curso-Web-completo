@@ -2,23 +2,38 @@
 
 namespace App;
 
-class Connection {
+use PDO;
+use PDOException;
 
-	public static function getDb() {
-		try {
+class Connection
+{
+    private $host = 'localhost';
+    private $porta = '5432';
+    private $banco = 'mvc';
+    private $usuario = 'postgres';
+    private $senha = 'root';
 
-			$conn = new \PDO(
-				"mysql:host=localhost;dbname=mvc;charset=utf8",
-				"root",
-				"" 
-			);
+    public function getDb()
+    {
+        try {
 
-			return $conn;
+            $conn = new PDO(
+                "pgsql:host=$this->host;port=$this->porta;dbname=$this->banco",
+                $this->usuario,
+                $this->senha,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                ]
+            );
 
-		} catch (\PDOException $e) {
-			//.. tratar de alguma forma ..//
-		}
-	}
+            return $conn;
+
+        } catch (PDOException $e) {
+
+            echo '<p>Erro ao conectar ao banco de dados: ' . $e->getMessage() . '</p>';
+
+        }
+    }
 }
 
 ?>
