@@ -9,7 +9,7 @@ class Connection
 {
     private $host = 'localhost';
     private $porta = '5432';
-    private $banco = 'mvc';
+    private $banco = 'twitter_clone';
     private $usuario = 'postgres';
     private $senha = 'root';
 
