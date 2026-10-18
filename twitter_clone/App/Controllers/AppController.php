@@ -6,10 +6,12 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
-class AppController extends Action {
+class AppController extends Action
+{
 
 
-	public function timeline() {
+	public function timeline()
+	{
 
 		$this->validaAutenticacao();
 
@@ -19,13 +21,14 @@ class AppController extends Action {
 		$tweet->__set('id_usuario', $_SESSION['id']);
 
 		$tweets = $tweet->getAll();
-			
+
 		$this->view->tweets = $tweets;
 
-		$this->render('timeline');
+		$this->render('timeline', 'layout');
 	}
 
-	public function tweet() {
+	public function tweet()
+	{
 
 		$this->validaAutenticacao();
 
@@ -40,12 +43,13 @@ class AppController extends Action {
 		exit;
 	}
 
-	public function validaAutenticacao() {
+	public function validaAutenticacao()
+	{
 
 		session_start();
 
 		//validar se o usuário está autenticado
-		if(
+		if (
 			!isset($_SESSION['id']) ||
 			$_SESSION['id'] == '' ||
 			!isset($_SESSION['nome']) ||
@@ -56,6 +60,28 @@ class AppController extends Action {
 		}
 	}
 
-} 
+	public function quemSeguir()
+	{
+		$this->validaAutenticacao();
 
-?>
+		$pesquisarPor = isset($_POST['pesquisarPor'])
+			? $_POST['pesquisarPor']
+			: '';
+
+		$usuarios = [];
+
+		if ($pesquisarPor != '') {
+
+			$usuario = Container::getModel('Usuario');
+
+			$usuario->__set('nome', $pesquisarPor);
+			$usuario->__set('id', $_SESSION['id']);
+
+			$usuarios = $usuario->getAll();
+		}
+
+		$this->view->usuarios = $usuarios;
+
+		$this->render('quemSeguir', 'layout');
+	}
+}

@@ -81,6 +81,28 @@
             return $this;
         }
 
+        public function getAll() {
+
+           $query = "
+                SELECT
+                    u.id,
+                    u.nome,
+                    u.email
+                FROM
+                    usuarios AS u
+                WHERE
+                    u.nome ILIKE :nome
+                    AND u.id != :id_usuario
+            ";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':nome', '%'.$this->__get('nome').'%');
+            $stmt->bindValue(':id_usuario', $this->__get('id'));
+            $stmt->execute();
+
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }
+
     }
 
 
