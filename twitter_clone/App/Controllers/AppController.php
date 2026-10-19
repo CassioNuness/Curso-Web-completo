@@ -24,6 +24,14 @@ class AppController extends Action
 
 		$this->view->tweets = $tweets;
 
+		$usuario = Container::getModel('Usuario');
+		$usuario->__set('id', $_SESSION['id']);
+
+		$this->view->infoUsuario = $usuario->getInfoUsuario();
+		$this->view->totalTweets = $usuario->getTotalTweets();
+		$this->view->total_Seguindo = $usuario->getTotalSeguindo();
+		$this->view->total_Seguidores = $usuario->getTotalSeguidores();
+
 		$this->render('timeline', 'layout');
 	}
 
@@ -82,6 +90,15 @@ class AppController extends Action
 
 		$this->view->usuarios = $usuarios;
 
+		// Recuperar informações do perfil
+		$usuario = Container::getModel('Usuario');
+		$usuario->__set('id', $_SESSION['id']);
+
+		$this->view->infoUsuario = $usuario->getInfoUsuario();
+		$this->view->totalTweets = $usuario->getTotalTweets();
+		$this->view->total_Seguindo = $usuario->getTotalSeguindo();
+		$this->view->total_Seguidores = $usuario->getTotalSeguidores();
+
 		$this->render('quemSeguir', 'layout');
 	}
 
@@ -104,5 +121,4 @@ class AppController extends Action
 		header('Location: /quem_seguir');
 		exit;
 	}
-
 }
