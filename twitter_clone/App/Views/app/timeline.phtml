@@ -84,7 +84,7 @@
                         <p><?= htmlspecialchars($tweet['tweet']) ?></p>
 
                         <br />
-
+						<?php if($tweet['id_usuario'] == $_SESSION['id']) { ?>
                         <form>
                             <div class="col d-flex justify-content-end">
                                 <button type="submit" class="btn btn-danger">
@@ -92,7 +92,7 @@
                                 </button>
                             </div>
                         </form>
-
+						<?php } ?>
                     </div>
                 </div>
 
