@@ -1,1 +1,4 @@
 /slim/vendor/
+/slim-api/vendor/
+/slim-api-skeleton/vendor/
+/slim-api/.env
