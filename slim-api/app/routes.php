@@ -20,4 +20,8 @@ return function (App $app) {
     $registrarRotasProdutos = require __DIR__ . '/routes/produtos.php';
     $registrarRotasProdutos($app);
 
+    // Carrega as rotas de autenticação
+    $registrarRotasAutenticacao = require __DIR__ . '/routes/autenticacao.php';
+    $registrarRotasAutenticacao($app);
+
 };

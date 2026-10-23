@@ -38,6 +38,9 @@ return function (ContainerBuilder $containerBuilder) {
                     'schema'   => 'public',
                 ],
 
+                // Chave secreta para autenticação JWT
+                'secretKey' => $_ENV['JWT_SECRET'] ?? '',
+
             ]);
         }
     ]);

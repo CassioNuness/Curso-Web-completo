@@ -42,7 +42,6 @@ $container = $containerBuilder->build();
 $container->get('db');
 
 // Instantiate the app
-// Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
